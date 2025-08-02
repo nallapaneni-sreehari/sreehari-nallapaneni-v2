@@ -15,10 +15,13 @@ const PORT = 3002;
 app.set("trust proxy", true);
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://r151149:r151149@cluster0.ecexy.mongodb.net/portfolio", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://r151149:r151149@cluster0.ecexy.mongodb.net/portfolio",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 mongoose.connection.once("open", () => console.log("MongoDB connected"));
 
 // --- Visitor Schema ---
@@ -36,9 +39,17 @@ const visitorSchema = new mongoose.Schema({
 const Visitor = mongoose.model("Visitor", visitorSchema);
 
 // --- Tracking Middleware ---
+const getClientIp = (req) => {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.ip || req.socket.remoteAddress;
+};
+
 const trackVisitor = async (req, res, next) => {
   try {
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const ip = getClientIp(req);
 
     const geo = geoip.lookup(ip) || {};
 
@@ -66,7 +77,7 @@ const trackVisitor = async (req, res, next) => {
 };
 
 // 🔥 Use tracking middleware before any route
-app.use(trackVisitor);
+app.get('/', trackVisitor);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "dist")));
