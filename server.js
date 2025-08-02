@@ -32,7 +32,7 @@ const visitorSchema = new mongoose.Schema({
     country: String,
     region: String,
     city: String,
-    network: String
+    network: String,
   },
   lastVisit: { type: Date, default: Date.now },
 });
@@ -50,13 +50,10 @@ const getClientIp = (req) => {
 
 const trackVisitor = async (req, res, next) => {
   try {
-    let ip = getClientIp(req);
+    const ip =
+      req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+      req.socket.remoteAddress;
 
-    // Get location from ipapi.co
-    const response = await fetch(`https://ipapi.co/${ip}/json/`);
-    const data = await response.json();
-
-    console.log(`location :: `, data);
     const existing = await Visitor.findOne({ ip });
 
     if (existing) {
@@ -64,14 +61,20 @@ const trackVisitor = async (req, res, next) => {
       existing.lastVisit = new Date();
       await existing.save();
     } else {
+      const geoRes = await fetch(`https://ipwho.is/${ip}`);
+      const geo = await geoRes.json();
+
+      const location = geo.success
+        ? {
+            country: geo.country || "",
+            region: geo.region || "",
+            city: geo.city || "",
+            network: connection?.isp,
+          }
+        : {};
       await Visitor.create({
         ip,
-        location: {
-          country: data.country_name || "",
-          region: data.region || "",
-          city: data.city || "",
-          network: data?.org || ""
-        },
+        location,
       });
     }
   } catch (err) {
@@ -81,9 +84,8 @@ const trackVisitor = async (req, res, next) => {
   next();
 };
 
-
 // 🔥 Use tracking middleware before any route
-app.get('/', trackVisitor);
+app.get("/", trackVisitor);
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "dist")));
