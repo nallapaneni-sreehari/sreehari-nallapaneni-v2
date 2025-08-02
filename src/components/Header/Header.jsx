@@ -72,6 +72,7 @@ function Header() {
           color: "var(--text-color)",
         }}
         shape="circle"
+        className="font-bold text-xl"
       />
       <div className="flex flex-col justify-center">
         <a title="send email" href={`mailto:${myEmail}`} className="ml-2">

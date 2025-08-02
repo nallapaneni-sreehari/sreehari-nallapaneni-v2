@@ -88,6 +88,16 @@ const trackVisitor = async (req, res, next) => {
 // 🔥 Use tracking middleware before any route
 app.get("/", trackVisitor);
 
+app.get("/get-visitors", async (req, res) => {
+  console.log(`got req`);
+  try {
+    const users = await Visitor.find().sort({ lastVisit: -1 });
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to fetch visitors" });
+  }
+});
+
 // Serve static files
 app.use(express.static(path.join(__dirname, "dist")));
 

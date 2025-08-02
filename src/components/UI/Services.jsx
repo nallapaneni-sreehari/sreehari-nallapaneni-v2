@@ -69,9 +69,10 @@ export default function Services() {
     };
   }, []);
 
-  const customizedMarker = (item) => {
+  const customizedMarker = (item, index) => {
     return (
       <span
+        key={index}
         className="flex w-2rem h-2rem align-items-center justify-content-center text-white border-circle z-1 shadow-1"
         style={{ backgroundColor: primary }}
       >
@@ -88,6 +89,7 @@ export default function Services() {
         data-aos="fade-up"
       >
         <Card
+          key={index}
           title={item.title}
           className={`w-[280px] md:w-[450px] mt-5 md:mt-2 text-sm shadow-lg bg-[var(--surface-ground)] border border-[var(--primary-color)]transition-all ease-in-out duration-500 cursor-pointer ${
             isLeft ? "mr-auto" : "ml-auto"
@@ -99,8 +101,8 @@ export default function Services() {
                 isLeft ? "mr-auto" : "ml-auto"
               }`}
             >
-              {item?.subTitle?.map((tag) => {
-                return <Tag severity={"secondary"} out value={tag} />;
+              {item?.subTitle?.map((tag, index) => {
+                return <Tag key={index} severity={"secondary"} out value={tag} />;
               })}
             </div>
 
