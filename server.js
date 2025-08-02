@@ -64,12 +64,13 @@ const trackVisitor = async (req, res, next) => {
       const geoRes = await fetch(`https://ipwho.is/${ip}`);
       const geo = await geoRes.json();
 
+      console.log(`geo :: `, geo);
       const location = geo.success
         ? {
             country: geo.country || "",
             region: geo.region || "",
             city: geo.city || "",
-            network: connection?.isp,
+            network: geo?.connection?.isp,
           }
         : {};
       await Visitor.create({
