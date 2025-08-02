@@ -56,6 +56,7 @@ const trackVisitor = async (req, res, next) => {
     const response = await fetch(`https://ipapi.co/${ip}/json/`);
     const data = await response.json();
 
+    console.log(`location :: `, data);
     const existing = await Visitor.findOne({ ip });
 
     if (existing) {
@@ -69,7 +70,7 @@ const trackVisitor = async (req, res, next) => {
           country: data.country_name || "",
           region: data.region || "",
           city: data.city || "",
-          network: data?.org
+          network: data?.org || ""
         },
       });
     }
