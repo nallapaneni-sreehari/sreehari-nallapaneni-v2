@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import mongoose from "mongoose";
-import geoip from "geoip-lite";
+import fetch from "node-fetch";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -49,9 +49,11 @@ const getClientIp = (req) => {
 
 const trackVisitor = async (req, res, next) => {
   try {
-    const ip = getClientIp(req);
+    let ip = getClientIp(req);
 
-    const geo = geoip.lookup(ip) || {};
+    // Get location from ipapi.co
+    const response = await fetch(`https://ipapi.co/${ip}/json/`);
+    const data = await response.json();
 
     const existing = await Visitor.findOne({ ip });
 
@@ -63,9 +65,10 @@ const trackVisitor = async (req, res, next) => {
       await Visitor.create({
         ip,
         location: {
-          country: geo.country || "",
-          region: geo.region || "",
-          city: geo.city || "",
+          country: data.country_name || "",
+          region: data.region || "",
+          city: data.city || "",
+          network: data?.org
         },
       });
     }
@@ -75,6 +78,7 @@ const trackVisitor = async (req, res, next) => {
 
   next();
 };
+
 
 // 🔥 Use tracking middleware before any route
 app.get('/', trackVisitor);
