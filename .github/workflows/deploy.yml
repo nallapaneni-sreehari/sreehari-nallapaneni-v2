@@ -21,6 +21,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /root/portfolio/sreehari-nallapaneni-v2
             git pull origin master
             npm install
