@@ -6,7 +6,7 @@ import { social } from '../../assets/data/socialAccounts';
 
 export default function Footer() {
   return (
-    <footer className="!bg-[var(--surface-ground)] pt-8 pb-5">
+    <footer className="card !bg-[var(--surface-ground)] pt-8 pb-5">
       <div className="container mx-auto px-4">
         <div className="sm:flex items-center justify-between gap-8">
           {/* Left Section */}

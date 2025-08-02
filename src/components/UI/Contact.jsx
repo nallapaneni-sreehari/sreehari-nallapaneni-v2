@@ -5,7 +5,7 @@ import { Button } from 'primereact/button';
 
 export default function Contact() {
     return (
-        <section id="contact" className="pb-16">
+        <section id="contact" className="card pb-16">
             <div className="container mx-auto px-4">
                 <h2 className="text-headingColor font-[700] text-[2.5rem] mb-5">
                     Get in touch

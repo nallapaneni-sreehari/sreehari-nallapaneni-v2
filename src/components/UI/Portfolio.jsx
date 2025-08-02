@@ -29,7 +29,7 @@ function Portfolio() {
   const activeItem = portfolios.find((p) => p.id === activeId);
 
   return (
-    <section id="portfolio">
+    <section className="card" id="portfolio">
       <div className="container">
         <div className="flex justify-between items-center flex-wrap">
           <div className="mb-7 sm:mb-0">

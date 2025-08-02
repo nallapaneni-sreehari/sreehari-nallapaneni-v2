@@ -53,7 +53,7 @@ function Hero() {
   };
 
   return (
-    <section className="pt-0" id="about">
+    <section className="card pt-0" id="about">
       <div className="container pt-14">
         <div className="md:flex items-center justify-between flex-col md:flex-row">
           {/* Left Content Start */}
