@@ -32,6 +32,7 @@ const visitorSchema = new mongoose.Schema({
     country: String,
     region: String,
     city: String,
+    network: String
   },
   lastVisit: { type: Date, default: Date.now },
 });
