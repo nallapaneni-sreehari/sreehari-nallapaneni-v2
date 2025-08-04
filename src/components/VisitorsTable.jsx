@@ -31,15 +31,19 @@ export default function VisitorTable() {
         <i className="pi pi-users mr-2"></i>Site Visitors
       </h3>
       <DataTable
+        stripedRows
         value={visitors}
+        sortMode="multiple"
         paginator
         rows={10}
         loading={loading}
         responsiveLayout="scroll"
       >
-        <Column field="ip" header="IP Address" />
+        <Column sortable field="ip" header="IP Address" />
         <Column
+          field="location.city"
           header="Location"
+          sortable
           body={(row) =>
             row.location
               ? `${row.location.city || ""}, ${row.location.region || ""}, ${
@@ -48,8 +52,17 @@ export default function VisitorTable() {
               : "Unknown"
           }
         />
-        <Column field="visitCount" header="Visits" />
         <Column
+          field="location.network"
+          header="Network"
+          sortable
+          body={(row) =>
+            row.location ? `${row.location?.network}` : "Unknown"
+          }
+        />
+        <Column sortable field="visitCount" header="Visits" />
+        <Column
+          sortable
           field="lastVisit"
           header="Last Visit"
           body={(row) => new Date(row.lastVisit).toLocaleString()}
