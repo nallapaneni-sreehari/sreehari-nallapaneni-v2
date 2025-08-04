@@ -13,7 +13,7 @@ const myEmail = "sreehari.nallapaneni@gmail.com";
 
 function Header() {
   const headerRef = useRef(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
@@ -72,9 +72,9 @@ function Header() {
           color: "var(--text-color)",
         }}
         shape="circle"
-        className="font-bold text-xl"
+        className="font-bold text-xl hidden md:flex"
       />
-      <div className="flex flex-col justify-center">
+      <div className="hidden md:flex flex-col justify-center">
         <a title="send email" href={`mailto:${myEmail}`} className="ml-2">
           <h2 className="text-xl font-bold leading-tight">
             <p>Sreehari</p>
@@ -82,6 +82,13 @@ function Header() {
           </h2>
         </a>
       </div>
+      {isMobile && (
+        <Button
+          icon="pi pi-bars"
+          onClick={() => setSidebarVisible(true)}
+          className="sm:hidden"
+        />
+      )}
     </div>
   );
 
@@ -149,24 +156,17 @@ function Header() {
       />
 
       <ThemeSwitcher />
-      {isMobile && (
-        <Button
-          icon="pi pi-bars"
-          onClick={() => setSidebarVisible(true)}
-          className="sm:hidden"
-        />
-      )}
     </div>
   );
 
   return (
     <header ref={headerRef} id="header" className="w-full">
-      <div className="card pb-0 pt-1">
+      <div className="w-full px-0 card py-0">
         <Toolbar
           start={leftContent}
           center={centerContent}
           end={rightContent}
-          className="flex-wrap gap-4 backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/10 dark:border-white/10 shadow-md rounded-lg transition-colors"
+          className="flex-wrap gap-2 md:gap-4 backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/10 dark:border-white/10 shadow-md rounded-lg transition-colors"
         />
 
         <Sidebar

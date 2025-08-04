@@ -56,7 +56,11 @@ function Portfolio() {
               onClick={() => showModalHandler(p.id)}
             >
               <figure className="hover:scale-105 ease-in-out duration-300">
-                <img className="rounded-[8px] w-full" src={p.imgUrl} alt={p.title} />
+                <img
+                  className="rounded-[8px] w-full"
+                  src={p.imgUrl}
+                  alt={p.title}
+                />
               </figure>
 
               <div className="rounded-[8px] !hidden group-hover:!flex w-full h-full bg-[var(--surface-ground)] bg-opacity-40 absolute top-0 left-0 z-[5] items-center justify-center">
@@ -69,7 +73,9 @@ function Portfolio() {
               <div className="!absolute group-hover:!hidden w-full h-full bg-opacity-90 top-0 z-[5]">
                 <div className="rounded-t-[8px] !absolute w-full h-1/4 bg-[var(--surface-ground)] bg-opacity-70 bottom-0">
                   <div className="flex flex-col px-2">
-                    <h2 className="py-1 text-xl text-[12px] font-[400]">{p.title}</h2>
+                    <h2 className="py-1 text-xl text-[12px] font-[400]">
+                      {p.title}
+                    </h2>
                     <p className="text-xs text-gray-200">
                       {p.description.slice(0, 50)}...
                       <span className="underline text-indigo-400"> More</span>
@@ -111,26 +117,43 @@ function Portfolio() {
                     className="rounded-lg w-full h-[250px] object-cover"
                   />
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 leading-7">{activeItem?.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 leading-7">
+                  {activeItem?.description}
+                </p>
                 <div>
-                  <h4 className="font-semibold text-[18px] mb-2">Technologies:</h4>
+                  <h4 className="font-semibold text-[18px] mb-2">
+                    Technologies:
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {activeItem?.technologies?.map((tech, idx) => (
-                      <Tag key={idx} value={tech} className="text-md" severity="info" />
+                      <Tag
+                        key={idx}
+                        value={tech}
+                        className="text-md"
+                        severity="info"
+                      />
                     ))}
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex flex-col gap-1 md:flex-row md:gap-5'>
+              <div className="mt-6 flex flex-col gap-1 md:flex-row md:gap-5">
                 <a href={activeItem.siteUrl} target="_blank">
-                  <Button icon="pi pi-external-link" label="Live Website" size="small"/>
+                  <Button
+                    icon="pi pi-external-link"
+                    label="Live Website"
+                    size="small"
+                  />
                 </a>
                 <a href={activeItem.gitUrl} target="_blank">
-                  <Button icon="pi pi-github" label="GitHub Link" size="small" severity="secondary" />
+                  <Button
+                    icon="pi pi-github"
+                    label="GitHub Link"
+                    size="small"
+                    severity="secondary"
+                  />
                 </a>
               </div>
             </>
-
           )}
         </Dialog>
       </div>
