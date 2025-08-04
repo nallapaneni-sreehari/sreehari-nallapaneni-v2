@@ -35,7 +35,7 @@ export default function VisitorTable() {
         value={visitors}
         sortMode="multiple"
         paginator
-        rows={10}
+        rows={50}
         loading={loading}
         responsiveLayout="scroll"
       >
