@@ -132,7 +132,7 @@ function Header() {
   const rightContent = (
     <div className="flex items-center gap-2">
       <a
-        href={googleDriveFileUrl}
+        href="/files/Sreehari_Nallapaneni_CV.pdf"
         target="_blank"
         rel="noopener noreferrer"
         download="Sreehari_Nallapaneni_CV.pdf"

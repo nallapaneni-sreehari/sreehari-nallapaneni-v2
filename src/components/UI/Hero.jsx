@@ -232,7 +232,7 @@ function Hero() {
           <div className="basis-1/4 justify-center items-center mt-10 flex-wrap gap-2 md:mt-0 md:flex-col md:justify-end md:text-end">
             <div className="mb-5">
               <h2 className="text-headingColor font-[700] text-xl">
-                <CountUp start={0} end={3} duration={2} suffix="+" />
+                <CountUp start={0} end={4} duration={2} suffix="+" />
               </h2>
               <h4 className="text-headingColor font-[700] text-xl">
                 Years of experience
