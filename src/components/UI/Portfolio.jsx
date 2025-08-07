@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import data from "../../assets/data/portfolioData";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
-import { Tag } from 'primereact/tag';
+import { Tag } from "primereact/tag";
+import ProjectCarasoul from "../ProjectCarasoul";
 function Portfolio() {
   const [nextItems, setNextItems] = useState(6);
   const [portfolios, setPortfolios] = useState(data);
@@ -38,12 +39,42 @@ function Portfolio() {
             </h3>
           </div>
           <div className="flex gap-3 flex-wrap">
-            <Button onClick={() => handleFilter("all")} label="All" severity="secondary" size="small" />
-            <Button onClick={() => handleFilter("mean")} label="MEAN Stack" severity="secondary" size="small" />
-            <Button onClick={() => handleFilter("mern")} label="MERN Stack" severity="secondary" size="small" />
-            <Button onClick={() => handleFilter("rest")} label="RESTful APIs" severity="secondary" size="small" />
-            <Button onClick={() => handleFilter("chrome_ext")} label="Chrome Extensions" severity="secondary" size="small" />
-            <Button onClick={() => handleFilter("others")} label="Others" severity="secondary" size="small" />
+            <Button
+              onClick={() => handleFilter("all")}
+              label="All"
+              severity="secondary"
+              size="small"
+            />
+            <Button
+              onClick={() => handleFilter("mean")}
+              label="MEAN Stack"
+              severity="secondary"
+              size="small"
+            />
+            <Button
+              onClick={() => handleFilter("mern")}
+              label="MERN Stack"
+              severity="secondary"
+              size="small"
+            />
+            <Button
+              onClick={() => handleFilter("rest")}
+              label="RESTful APIs"
+              severity="secondary"
+              size="small"
+            />
+            <Button
+              onClick={() => handleFilter("chrome_ext")}
+              label="Chrome Extensions"
+              severity="secondary"
+              size="small"
+            />
+            <Button
+              onClick={() => handleFilter("others")}
+              label="Others"
+              severity="secondary"
+              size="small"
+            />
           </div>
         </div>
 
@@ -51,14 +82,17 @@ function Portfolio() {
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 !mt-10">
           {portfolios.slice(0, nextItems)?.map((p, idx) => (
             <div
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-aos-duration="1800"
               key={idx}
-              className="w-full md:!w-[350px] !group !relative !z-[1] !cursor-pointer"
+              className="w-full md:!w-[350px] !group !relative !z-[1] !cursor-pointer gap-3 mb-4 md:mb-0"
               onClick={() => showModalHandler(p.id)}
             >
               <figure className="hover:scale-105 ease-in-out duration-300">
                 <img
                   className="rounded-[8px] w-full"
-                  src={p.imgUrl}
+                  src={typeof p.imgUrl === "string" ? p.imgUrl : p.imgUrl[0]}
                   alt={p.title}
                 />
               </figure>
@@ -105,22 +139,43 @@ function Portfolio() {
           visible={showModal}
           onHide={() => setShowModal(false)}
           style={{ width: "50vw" }}
-          className="p-fluid"
+          className="p-fluid !w-full md:!w-3/5"
         >
           {activeItem && (
             <>
               <div className="flex flex-col gap-5">
                 <div className="hidden md:block">
-                  <img
-                    src={activeItem?.imgUrl}
-                    alt={activeItem?.title}
-                    className="rounded-lg w-full h-[250px] object-cover"
-                  />
+                  {typeof activeItem?.imgUrl === "string" ? (
+                    <img
+                      src={activeItem?.imgUrl}
+                      alt={activeItem?.title}
+                      className="rounded-lg w-full h-[250px] object-cover"
+                    />
+                  ) : (
+                    <ProjectCarasoul projects={activeItem} />
+                  )}
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 leading-7">
                   {activeItem?.description}
                 </p>
-                <div>
+                <div className="flex flex-col gap-1 md:flex-row md:gap-5">
+                  <a href={activeItem.siteUrl} target="_blank">
+                    <Button
+                      icon="pi pi-external-link"
+                      label="Live Website"
+                      size="small"
+                    />
+                  </a>
+                  <a href={activeItem.gitUrl} target="_blank">
+                    <Button
+                      icon="pi pi-github"
+                      label="GitHub Link"
+                      size="small"
+                      severity="secondary"
+                    />
+                  </a>
+                </div>
+                <div className="mb-4">
                   <h4 className="font-semibold text-[18px] mb-2">
                     Technologies:
                   </h4>
@@ -135,23 +190,6 @@ function Portfolio() {
                     ))}
                   </div>
                 </div>
-              </div>
-              <div className="mt-6 flex flex-col gap-1 md:flex-row md:gap-5">
-                <a href={activeItem.siteUrl} target="_blank">
-                  <Button
-                    icon="pi pi-external-link"
-                    label="Live Website"
-                    size="small"
-                  />
-                </a>
-                <a href={activeItem.gitUrl} target="_blank">
-                  <Button
-                    icon="pi pi-github"
-                    label="GitHub Link"
-                    size="small"
-                    severity="secondary"
-                  />
-                </a>
               </div>
             </>
           )}

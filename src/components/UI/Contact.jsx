@@ -23,7 +23,7 @@ export default function Contact() {
                     </div>
 
                     {/* Form */}
-                    <div className="w-full">
+                    <div className="w-full mt-4 md:mt-0">
                         <form
                             action="https://formspree.io/f/xyyqobnp"
                             method="POST"

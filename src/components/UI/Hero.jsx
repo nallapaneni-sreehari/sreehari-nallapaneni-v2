@@ -122,7 +122,7 @@ function Hero() {
                 href={social.github}
                 target="_blank"
                 rel="noreferrer"
-                className="!text-gray-700 text-xl font-[400]"
+                className="!text-gray-700 dark:!text-gray-100 text-xl font-[400]"
               >
                 <i className="pi pi-github"></i>
               </a>
@@ -132,7 +132,7 @@ function Hero() {
                 href={social.linkedIn}
                 target="_blank"
                 rel="noreferrer"
-                className="!text-blue-700 text-xl font-[400]"
+                className="!text-blue-600 text-xl font-[400]"
               >
                 <i className="pi pi-linkedin"></i>
               </a>
@@ -232,7 +232,7 @@ function Hero() {
           <div className="basis-1/4 justify-center items-center mt-10 flex-wrap gap-2 md:mt-0 md:flex-col md:justify-end md:text-end">
             <div className="mb-5">
               <h2 className="text-headingColor font-[700] text-xl">
-                <CountUp start={0} end={4} duration={2} suffix="+" />
+                <CountUp start={0} end={4} duration={2} suffix="" />
               </h2>
               <h4 className="text-headingColor font-[700] text-xl">
                 Years of experience
@@ -249,7 +249,7 @@ function Hero() {
 
             <div className="mb-5">
               <h2 className="text-headingColor font-[700] text-xl">
-                <CountUp start={0} end={5} duration={2} suffix="+" />
+                <CountUp start={0} end={8} duration={2} suffix="+" />
               </h2>
               <h4 className="text-headingColor font-[700] text-xl">
                 Realtime Projects Experience
@@ -285,7 +285,7 @@ function Hero() {
               <h2 className="text-headingColor font-[700] text-xl">
                 <CountUp
                   start={0}
-                  end={3}
+                  end={5}
                   duration={1}
                   suffix="+ Projects"
                   prefix="in "

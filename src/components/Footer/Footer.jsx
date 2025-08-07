@@ -34,11 +34,11 @@ export default function Footer() {
 
               {/* Social Icons */}
               {[
-                { icon: 'pi pi-github', link: social.github, title: 'GitHub' },
-                { icon: 'pi pi-linkedin', link: social.linkedIn, title: 'LinkedIn' },
-                { icon: 'pi pi-facebook', link: social.facebook, title: 'Facebook' },
-                { icon: 'pi pi-instagram', link: social.instagram, title: 'Instagram' }
-              ].map(({ icon, link, title }) => (
+                { icon: 'pi pi-github', link: social.github, title: 'GitHub', color: '!text-gray-600 dark:!text-gray-100' },
+                { icon: 'pi pi-linkedin', link: social.linkedIn, title: 'LinkedIn', color: '!text-blue-600' },
+                { icon: 'pi pi-facebook', link: social.facebook, title: 'Facebook', color: '!text-blue-600' },
+                { icon: 'pi pi-instagram', link: social.instagram, title: 'Instagram', color: '!text-rose-600' }
+              ].map(({ icon, link, title, color }) => (
                 <a
                   key={title}
                   href={link}
@@ -47,7 +47,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="w-[35px] h-[35px] bg-[var(--surface-ground)] rounded-full flex items-center justify-center hover:bg-[var(--primary-color)] transition-colors"
                 >
-                  <i className={`${icon} text-gray-400 text-lg`} />
+                  <i className={`${icon} ${color} text-lg`} />
                 </a>
               ))}
 

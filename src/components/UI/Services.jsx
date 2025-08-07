@@ -102,7 +102,7 @@ export default function Services() {
               }`}
             >
               {item?.subTitle?.map((tag, index) => {
-                return <Tag key={index} severity={"secondary"} out value={tag} />;
+                return <Tag key={index} severity={"secondary"} value={tag} />;
               })}
             </div>
 
