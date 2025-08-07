@@ -95,6 +95,7 @@ export default function Services() {
             isLeft ? "mr-auto" : "ml-auto"
           }`}
         >
+          
           <div className="flex flex-col gap-3 ml-auto mr-auto">
             <div
               className={`grid grid-cols-12 gap-2 flex-row  ${
