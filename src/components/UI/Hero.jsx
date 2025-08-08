@@ -96,10 +96,10 @@ function Hero() {
               <p
                 className="gap-2 text-headingColor font-[500] text-[15px] leading-7 sm:pl-14 sm:pr-10 md:p-0"
                 data-aos="fade-left"
-                data-aos-duration="1500"
-                data-aos-delay="800"
+                data-aos-duration="1200"
+                data-aos-delay="200"
               >
-                Welcome to my portfolio! With 3+ years of experience as a
+                Welcome to my portfolio! With 4 years of experience as a
                 Software Engineer, I've built robust, user-friendly applications
                 using MongoDB, ExpressJS, Angular, and NodeJS. Explore
                 <a
