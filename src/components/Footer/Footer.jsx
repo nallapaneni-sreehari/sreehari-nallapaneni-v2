@@ -34,7 +34,7 @@ export default function Footer() {
 
               {/* Social Icons */}
               {[
-                { icon: 'pi pi-github', link: social.github, title: 'GitHub', color: '!text-gray-600 dark:!text-gray-100' },
+                { icon: 'pi pi-github', link: social.github, title: 'GitHub', color: '!text-gray-200 dark:!text-gray-100' },
                 { icon: 'pi pi-linkedin', link: social.linkedIn, title: 'LinkedIn', color: '!text-blue-600' },
                 { icon: 'pi pi-facebook', link: social.facebook, title: 'Facebook', color: '!text-blue-600' },
                 { icon: 'pi pi-instagram', link: social.instagram, title: 'Instagram', color: '!text-rose-600' }

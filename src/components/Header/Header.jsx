@@ -115,7 +115,7 @@ function Header() {
           className="hover:font-bold border-b-2 border-transparent hover:border-indigo-800"
           href="#portfolio"
         >
-          Portfolio
+          Projects
         </a>
       </li>
       <li>
@@ -182,7 +182,7 @@ function Header() {
               <a href="#services">Services</a>
             </li>
             <li>
-              <a href="#portfolio">Portfolio</a>
+              <a href="#portfolio">Projects</a>
             </li>
             <li>
               <a href="#contact">Contact</a>

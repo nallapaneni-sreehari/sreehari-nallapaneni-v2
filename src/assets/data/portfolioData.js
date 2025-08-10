@@ -17,12 +17,34 @@ import reportsForge3 from "../images/reports-forge-3.png";
 import reportsForge2 from "../images/reports-forge-2.png";
 import reportsForge from "../images/reports-forge.png";
 
+// ytAgent
+import ytAgent1 from "../images/yt-agent-02.png";
+import ytAgent2 from "../images/yt-agent-01.png";
+import ytAgent3 from "../images/yt-agent-03.png";
+
 // mts
 import mts1 from "../images/mts-1.png";
 import mts2 from "../images/mts-2.png";
 import mts3 from "../images/mts-3.png";
 
 const portfolios = [
+  {
+    id: "20",
+    imgUrl: [ytAgent1, ytAgent2, ytAgent3],
+    category: "mean",
+    title: "Youtube AI Agent",
+    description:
+      "YouTube AI Agent — An intelligent video discovery and comparison tool that fetches relevant YouTube videos based on your query, then analyzes and compares them by metrics like views, likes, and content focus. Built on an MCP protocol-inspired REST API skeleton for fast, scalable, and structured responses.",
+    technologies: [
+      "Node Js",
+      "OpenAI API",
+      "Youtube Data API",
+      "Tailwind CSS",
+      "Ejs"
+    ],
+    siteUrl: "https://youtubeai.iamsreehari.in/",
+    gitUrl: "https://github.com/nallapaneni-sreehari/youtube-ai-agent",
+  },
   {
     id: "11",
     imgUrl: [reportsForge3, reportsForge, reportsForge2],

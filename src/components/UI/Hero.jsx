@@ -88,7 +88,7 @@ function Hero() {
                 href="#portfolio"
                 className="!text-smallTextColor font-[600] text-[16px] border-b-2 border-solid !border-[var(--primary-color)]"
               >
-                See portfolio
+                See projects
               </a>
             </div>
 
@@ -122,7 +122,7 @@ function Hero() {
                 href={social.github}
                 target="_blank"
                 rel="noreferrer"
-                className="!text-gray-700 dark:!text-gray-100 text-xl font-[400]"
+                className="!text-gray-700 dark:!text-gray-500 text-xl font-[400]"
               >
                 <i className="pi pi-github"></i>
               </a>
