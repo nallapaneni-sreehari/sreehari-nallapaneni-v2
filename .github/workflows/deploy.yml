@@ -27,4 +27,4 @@ jobs:
             git pull origin master
             npm install
             npm run build
-            pm2 start server.js || pm2 restart server.js
+            pm2 start server.js --name portfolio || pm2 restart portfolio
