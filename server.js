@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
-import UAParser from "ua-parser-js";   // 👈 new import
+import { UAParser } from "ua-parser-js";   // 👈 new import
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
