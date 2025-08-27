@@ -17,7 +17,7 @@ export default function VisitorTable() {
     try {
       const response = await fetch("/get-visitors"); // backend API
       const data = await response.json();
-      setVisitors(data); // assuming you have a state to store visitors
+      setVisitors(data);
     } catch (err) {
       console.error("Failed to fetch visitors", err);
     } finally {
@@ -56,10 +56,33 @@ export default function VisitorTable() {
           field="location.network"
           header="Network"
           sortable
+          body={(row) => (row.location ? row.location?.network : "Unknown")}
+        />
+
+        {/* ✅ New Columns */}
+        <Column sortable field="device" header="Device" />
+        <Column
+          field="os.name"
+          header="OS"
           body={(row) =>
-            row.location ? `${row.location?.network}` : "Unknown"
+            row.os ? `${row.os.name || ""} ${row.os.version || ""}` : "Unknown"
           }
         />
+        <Column
+          field="browser.name"
+          header="Browser"
+          body={(row) =>
+            row.browser
+              ? `${row.browser.name || ""} ${row.browser.version || ""}`
+              : "Unknown"
+          }
+        />
+        <Column
+          field="isBot"
+          header="Bot?"
+          body={(row) => (row.isBot ? "Yes 🤖" : "No 👤")}
+        />
+
         <Column sortable field="visitCount" header="Visits" />
         <Column
           sortable

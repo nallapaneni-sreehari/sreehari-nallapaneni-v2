@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import mongoose from "mongoose";
 import fetch from "node-fetch";
+import UAParser from "ua-parser-js";   // 👈 new import
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,10 +12,9 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3002;
 
-// Optional: Trust proxy if behind Nginx or similar
 app.set("trust proxy", true);
 
-// Connect to MongoDB
+// --- MongoDB connection ---
 mongoose.connect(
   "mongodb+srv://r151149:r151149@cluster0.ecexy.mongodb.net/portfolio",
   {
@@ -34,25 +34,43 @@ const visitorSchema = new mongoose.Schema({
     city: String,
     network: String,
   },
+  device: {
+    type: String, // desktop / mobile / tablet / bot
+  },
+  os: {
+    name: String,
+    version: String,
+  },
+  browser: {
+    name: String,
+    version: String,
+  },
+  isBot: { type: Boolean, default: false },
   lastVisit: { type: Date, default: Date.now },
 });
 
 const Visitor = mongoose.model("Visitor", visitorSchema);
 
 // --- Tracking Middleware ---
-const getClientIp = (req) => {
-  const forwarded = req.headers["x-forwarded-for"];
-  if (forwarded) {
-    return forwarded.split(",")[0].trim();
-  }
-  return req.ip || req.socket.remoteAddress;
-};
-
 const trackVisitor = async (req, res, next) => {
   try {
     const ip =
       req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
       req.socket.remoteAddress;
+
+    const uaString = req.headers["user-agent"] || "";
+    const parser = new UAParser(uaString);
+    const ua = parser.getResult();
+
+    // Detect bots
+    const isBot = /bot|crawler|spider|crawling|curl|wget|postman|python/i.test(
+      uaString
+    );
+
+    const deviceType =
+      isBot
+        ? "bot"
+        : ua.device.type || "desktop"; // ua.device.type can be 'mobile', 'tablet', etc.
 
     const existing = await Visitor.findOne({ ip });
 
@@ -64,7 +82,6 @@ const trackVisitor = async (req, res, next) => {
       const geoRes = await fetch(`https://ipwho.is/${ip}`);
       const geo = await geoRes.json();
 
-      console.log(`geo :: `, geo);
       const location = geo.success
         ? {
             country: geo.country || "",
@@ -73,9 +90,20 @@ const trackVisitor = async (req, res, next) => {
             network: geo?.connection?.isp,
           }
         : {};
+
       await Visitor.create({
         ip,
         location,
+        device: deviceType,
+        os: {
+          name: ua.os.name || "",
+          version: ua.os.version || "",
+        },
+        browser: {
+          name: ua.browser.name || "",
+          version: ua.browser.version || "",
+        },
+        isBot,
       });
     }
   } catch (err) {
@@ -89,7 +117,6 @@ const trackVisitor = async (req, res, next) => {
 app.get("/", trackVisitor);
 
 app.get("/get-visitors", async (req, res) => {
-  console.log(`got req`);
   try {
     const users = await Visitor.find().sort({ lastVisit: -1 });
     return res.status(200).json(users);
@@ -106,7 +133,6 @@ app.all("/{*any}", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
